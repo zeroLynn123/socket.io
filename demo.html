@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>将滚动条（scrollbar）保持在最底部的方法 - 滚动条, scrollbar, 页面底部, 聊天窗口, </title>
+</head>
+
+<body>
+    <div id="example">
+        <div id="example_main">
+            <div id="scrolldIV" style="overflow:auto; height: 100px; width: 400px; border: 1px solid #999;">
+            </div>
+            <input type="button" value="插入一行" onclick="add();">
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+    function add() {
+        var now = new Date();
+        var div = document.getElementById('scrolldIV');
+        div.innerHTML = div.innerHTML + 'time_' + now.getTime() + '<br />';
+        div.scrollTop = div.scrollHeight;
+    }
+</script>

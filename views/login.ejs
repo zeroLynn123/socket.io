@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>socket登录</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .login {
+            width: 400px;
+            height: 200px;
+            margin: 250px auto;
+            padding: 20px;
+        }
+        
+        .login #nickname {
+            border: 1px solid skyblue;
+            padding: 10px;
+            width: 60%;
+            margin: 20px 40px;
+            border-radius: 25px;
+            outline: none;
+            font-size: 18px;
+        }
+        
+        .login #come {
+            font-size: 18px;
+            width: 70px;
+            height: 35px;
+            background-color: skyblue;
+            border: none;
+            cursor: pointer;
+            margin-left: 150px;
+            border: 1px solid yellowgreen;
+            border-radius: 15px;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <span>请输入昵称:</span>
+        <br>
+        <input id="nickname" type="text">
+        <br>
+        <button id="come">come</button>
+    </div>
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+    $('#come').on('click', function() {
+        var val = $('#nickname').val();
+        var nickname = val.trim();
+        if (nickname.length == 0) {
+            alert('请输入正确的昵称');
+        } else {
+            location.href = '/index?nickname=' + nickname;
+        }
+    })
+</script>

@@ -1,0 +1,2 @@
+cnpm install 下载安装包
+node ./bin/www  运行项目

@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Mement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #container {
+            width: 400px;
+            height: 500px;
+            border: 2px solid greenyellow;
+            overflow: hidden;
+            margin: 50px auto;
+            padding: 5px;
+        }
+        
+        .messages {
+            width: 100%;
+            height: 35px;
+            line-height: 35px;
+            border-radius: 20px;
+            background-color: skyblue;
+            box-sizing: border-box;
+            padding: 0 15px 5px 15px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .messages .circle {
+            display: block;
+            position: absolute;
+            top: 4px;
+            left: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: red;
+        }
+        
+        img,
+        .nickname,
+        .content {
+            float: left;
+        }
+        
+        img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .nickname,
+        .content {
+            color: gray;
+            font-size: 12px;
+            font-weight: 900;
+        }
+        
+        .content {
+            margin-left: 5px;
+        }
+        
+        .time {
+            font-size: 12px;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="container">
+        <li class="messages">
+
+        </li>
+    </ul>
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+    var locString = String(window.document.location.href);
+
+    function getQueryString(name) {
+        var rs = new RegExp("(^|)" + name + "=([^&]*)(&|$)", "gi").exec(locString),
+            tmp;
+        if (tmp = rs) {
+            return decodeURI(tmp[2]);
+        }
+        return "";
+    }
+    var log_nickname = getQueryString('nickname'); //昵称
+    var isRead = getQueryString('isRead');
+
+    var date = new Date();
+    var time = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + (date.getDate()) + " " +
+        ('0' + date.getHours()).substr(-2) + ':' + ('0' + date.getMinutes()).substr(-2) + ":" + ('0' + date.getSeconds()).substr(-2);
+
+    var data = [{
+        id: 1,
+        nickname: '小明',
+        content: '给你1条信息',
+        time: time,
+        isRead: false
+    }, {
+        id: 2,
+        nickname: '小花',
+        content: '给你2条信息',
+        time: time,
+        isRead: false
+    }, {
+        id: 3,
+        nickname: '小芳',
+        content: '给你3条信息',
+        time: time,
+        isRead: false
+    }];
+
+    var str = '';
+    for (var i = 0; i < data.length; i++) {
+        str += '<li class="messages">' +
+            '<span class="circle"></span>' +
+            '<img src="images/photo.jpg" />' +
+            '<span class="nickname">' + data[i].nickname + '</span>' +
+            '<span class="content">' + data[i].content + '</span>' +
+            '<span class="time">' + data[i].time + '</span>' +
+            '</li>';
+        $('#container').html(str);
+    }
+
+    var li = $('li');
+    for (var i = 0; i < li.length; i++) {
+        (function(index) {
+            li[i].addEventListener('click', function() {
+                // data[index].isRead = true;
+                // history.pushState(data[index].isRead);
+                if ((index + 1) == data[index].id) {
+                    location.href = '/chat?id=' + data[index].id +
+                        '&nickname=' + data[index].nickname +
+                        '&content=' + data[index].content +
+                        '&time=' + data[index].time +
+                        '&isRead=' + data[index].isRead +
+                        '&log_nickname=' + log_nickname;
+                }
+            });
+        })(i)
+    }
+
+
+    // if (data[index].isRead == true) {
+
+    // }
+</script>
